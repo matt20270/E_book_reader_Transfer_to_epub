@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="ko"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data: blob:; connect-src 'none'; object-src 'none'; base-uri 'self'; form-action 'none';">
+<meta name="referrer" content="no-referrer">
+<meta name="theme-color" content="#0d1424"><title>X4 Pro Reader Studio</title>
+<link rel="stylesheet" href="css/style.css"></head>
+<body>
+<header><b class="brand">X4 Pro Reader Studio</b>
+<nav id="nav">
+<button data-page="home">🏠 <span data-i18n="nav.home"></span></button>
+<button data-page="txt">📝 <span data-i18n="nav.txt"></span></button>
+<button data-page="convert">📚 <span data-i18n="nav.convert"></span></button>
+<button data-page="settings">⚙ <span data-i18n="nav.settings"></span></button>
+</nav></header>
+<main>
+<section id="home" class="page">
+ <h1 data-i18n="home.title"></h1><p class="muted" data-i18n="home.sub"></p>
+ <div class="cards">
+  <div class="card"><h2 data-i18n="nav.convert"></h2><p class="muted" data-i18n="home.convert.desc"></p><button class="primary" data-go="convert" data-i18n="home.start"></button></div>
+  <div class="card"><h2 data-i18n="nav.txt"></h2><p class="muted" data-i18n="home.txt.desc"></p><button data-go="txt" data-i18n="home.view"></button></div>
+ </div>
+ <p class="muted small" data-i18n="home.privacy"></p>
+</section>
+<section id="txt" class="page">
+ <h1 data-i18n="nav.txt"></h1>
+ <label class="drop" id="drop"><input id="file" type="file" accept=".txt,text/plain" hidden><span data-i18n="txt.drop"></span></label>
+ <div class="opts">
+  <label><span data-i18n="txt.mode"></span><select id="mode"><option value="auto" data-i18n="txt.mode.auto"></option><option value="blank" data-i18n="txt.mode.blank"></option><option value="keep" data-i18n="txt.mode.keep"></option></select></label>
+  <label><span data-i18n="txt.join"></span><select id="join"><option value="auto" data-i18n="txt.join.auto"></option><option value="space" data-i18n="txt.join.space"></option><option value="none" data-i18n="txt.join.none"></option></select></label>
+  <label class="chk"><input id="dialogue" type="checkbox" checked><span data-i18n="txt.dialogue"></span></label>
+ </div>
+ <p id="info" class="muted small"></p>
+ <div class="split"><div><h3 data-i18n="txt.orig"></h3><textarea id="orig" readonly></textarea></div>
+ <div><h3 data-i18n="txt.result"></h3><textarea id="result"></textarea></div></div>
+ <div class="opts">
+  <label><span data-i18n="txt.enc"></span><select id="enc"><option value="utf8">UTF-8</option><option value="utf8bom">UTF-8 BOM</option><option value="cp949">CP949 / EUC-KR</option></select></label>
+  <label><span data-i18n="txt.nl"></span><select id="nl"><option value="&#10;">LF</option><option value="&#13;&#10;">CRLF</option><option value="&#13;">CR</option></select></label>
+  <button class="primary" id="save" data-i18n="txt.save"></button>
+ </div>
+ <p id="saveMsg" class="notice small"></p>
+</section>
+<section id="convert" class="page">
+ <h1 data-i18n="cv.title"></h1><p class="muted small" data-i18n="cv.intro"></p>
+ <label class="drop" id="cvDrop"><input id="cvFile" type="file" accept=".pdf,application/pdf" hidden><span data-i18n="cv.drop"></span></label>
+ <p id="cvInfo" class="muted small"></p>
+ <div class="opts">
+  <label><span data-i18n="cv.opt.lang"></span><select id="cvLang"><option value="koen" data-i18n="cv.lang.koen"></option><option value="ko" data-i18n="cv.lang.ko"></option><option value="en" data-i18n="cv.lang.en"></option></select></label>
+  <label><span data-i18n="cv.opt.quality"></span><select id="cvQuality"><option value="std" data-i18n="cv.q.std"></option><option value="hi" data-i18n="cv.q.hi"></option></select></label>
+  <label><span data-i18n="cv.opt.mode"></span><select id="cvMode"><option value="text" data-i18n="cv.m.text"></option><option value="both" data-i18n="cv.m.both"></option><option value="image" data-i18n="cv.m.image"></option></select></label>
+  <label><span data-i18n="cv.opt.color"></span><select id="cvColor"><option value="gray" data-i18n="cv.c.gray"></option><option value="color" data-i18n="cv.c.color"></option></select></label>
+  <label><span data-i18n="cv.opt.res"></span><select id="cvRes"><option value="small" data-i18n="cv.r.small"></option><option value="large" data-i18n="cv.r.large"></option></select></label>
+ </div>
+ <div class="opts">
+  <label class="chk"><input id="cvCover" type="checkbox" checked><span data-i18n="cv.opt.cover"></span></label>
+  <label class="chk"><input id="cvRunning" type="checkbox" checked><span data-i18n="cv.opt.running"></span></label>
+  <label class="chk"><input id="cvForceOcr" type="checkbox"><span data-i18n="cv.opt.forceOcr"></span></label>
+  <label class="chk"><input id="cvAutoImg" type="checkbox"><span data-i18n="cv.opt.autoImg"></span></label>
+ </div>
+ <div class="opts"><button class="primary" id="cvStart" data-i18n="cv.start"></button><button id="cvCancel" hidden data-i18n="cv.cancel"></button></div>
+ <progress id="cvProg" max="100" value="0" hidden></progress>
+ <p id="cvStatus" class="muted small"></p>
+ <div id="cvReview" hidden>
+  <h2 data-i18n="cv.review"></h2>
+  <div class="opts">
+   <button id="cvPrev" data-i18n="cv.prev"></button><b id="cvPageNo"></b><button id="cvNext" data-i18n="cv.next"></button>
+   <label><span data-i18n="cv.goto"></span><input id="cvGoto" type="number" min="1" inputmode="numeric"></label>
+   <button id="cvNextCheck" data-i18n="cv.nextCheck"></button>
+   <label><span data-i18n="cv.pageMode"></span><select id="cvPageMode"><option value="text" data-i18n="cv.m.text"></option><option value="both" data-i18n="cv.m.both"></option><option value="image" data-i18n="cv.m.image"></option><option value="skip" data-i18n="cv.m.skip"></option></select></label>
+  </div>
+  <p id="cvPageInfo" class="muted small"></p><p id="cvRemoved" class="muted small"></p>
+  <p class="muted small" data-i18n="cv.legend"></p>
+  <div class="split"><div id="cvPreview"></div><div id="cvEditor"></div></div>
+  <div class="opts">
+   <label><span data-i18n="cv.meta.title"></span><input id="metaTitle" type="text" maxlength="200"></label>
+   <label><span data-i18n="cv.meta.author"></span><input id="metaAuthor" type="text" maxlength="200"></label>
+   <label><span data-i18n="cv.meta.lang"></span><select id="metaLang"><option value="ko">한국어</option><option value="en">English</option></select></label>
+   <button class="primary" id="cvBuild" data-i18n="cv.build"></button>
+  </div>
+ </div>
+ <p id="cvMsg" class="notice small"></p>
+</section>
+<section id="settings" class="page"><h1 data-i18n="nav.settings"></h1>
+ <div class="card"><h2 data-i18n="set.lang"></h2><select id="lang"><option value="ko">한국어</option><option value="en">English</option></select>
+ <p class="muted small" data-i18n="set.lang.tip"></p></div></section>
+</main>
+<script src="vendor/jszip/jszip.min.js"></script>
+<script type="module" src="js/app.js"></script>
+</body></html>
